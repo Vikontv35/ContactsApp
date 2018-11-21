@@ -47,9 +47,17 @@ public class PhoneNumber
         }
     }
 
+    /// <summary>
+    /// Конструктор класса
+    /// </summary>
+    /// <param name="number"></param>
     public PhoneNumber(long number)
     {
         Number = number;
     }
+
+    /// <summary>
+    /// Конструктор класса
+    /// </summary>
     public PhoneNumber() { }
 }

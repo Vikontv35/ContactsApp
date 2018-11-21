@@ -150,6 +150,16 @@ public class Contact
         }
     }
     public Contact() { }
+
+    /// <summary>
+    /// Конструктор класса Contact
+    /// </summary>
+    /// <param name="name">Имя контакта</param>
+    /// <param name="surname">Фамилия контакта</param>
+    /// <param name="num">Номертелефона контакта</param>
+    /// <param name="date">Дата рождения контакта</param>
+    /// <param name="idvk">vk.com контакта</param>
+    /// <param name="email">e-mail контакта</param>
     public Contact(string name, string surname,long num, DateTime date,string idvk,string email)
     {
         Name = name;
