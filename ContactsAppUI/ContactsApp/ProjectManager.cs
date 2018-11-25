@@ -10,17 +10,16 @@ using System.Text;
 public class ProjectManager
 {
     
-    private static string _path= Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +"/save/ContactsApp.notes";
+    public static string _path= Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +"/save/ContactsApp.notes";
     
     /// <summary>
     /// Выполняет сохранение списка контактов
     /// </summary>
     /// <param name="data">Список контактов для сохранения</param>
-    public static void SaveToFile(Project data)
+    public static void SaveToFile(Project data, string filePath)
     {
-        
         JsonSerializer serializer = new JsonSerializer();
-        using (StreamWriter sw = new StreamWriter(_path))
+        using (StreamWriter sw = new StreamWriter(filePath))
         using (JsonWriter writer = new JsonTextWriter(sw))
         {
             serializer.Serialize(writer, data);
@@ -30,12 +29,12 @@ public class ProjectManager
     /// <summary>
     /// Выполняет загруку списка контактов
     /// </summary>    
-    public static Project LoadFromFile()
+    public static Project LoadFromFile(string filePath)
     {
         Project project = null;
         JsonSerializer serializer = new JsonSerializer();
 
-        using (StreamReader sr = new StreamReader(_path))
+        using (StreamReader sr = new StreamReader(filePath))
         using (JsonReader reader = new JsonTextReader(sr))
         {
             //Вызываем десериализацию и явно преобразуем результат в целевой тип данных

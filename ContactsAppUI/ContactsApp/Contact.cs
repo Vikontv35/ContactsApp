@@ -51,14 +51,14 @@ public class Contact
             
             while (i < value.Length)
             {
-                if ((value[i] < 65) || (value[i] > 122) || (value[i] > 91 && value[i] < 96))
+                if ((value[i] < 'A') || (value[i] > 'z') || (value[i] > 'Z' && value[i] < 'a'))
                 {
                     throw new ArgumentException("Фамилия должна содержать только буквы.");
                 }
                 i++;
             }
             i = 0;
-            if (value[i] > 96 && value[i] < 123)
+            if (value[i] >= 'a' && value[i] <= 'z')
             {
                 throw new ArgumentException("Фамилия должна начинаться с заглавной буквы.");
             }
@@ -79,18 +79,17 @@ public class Contact
                 throw new ArgumentException("Длинна имени не должна превышать 50 символов.");
             }
             int i = 0;
-            
-            while (i<value.Length)
+
+            while (i < value.Length)
             {
-                //if ((value[i] > 64 && value[i] < 91) || !(value[i] > 96 && value[i] < 123))
-                if((value[i] < 65) || (value[i] > 122) || (value[i] > 91 && value[i]< 96))
+                if ((value[i] < 'A') || (value[i] > 'z') || (value[i] > 'Z' && value[i] < 'a'))
                 {
                     throw new ArgumentException("Имя должно содержать только буквы.");
                 }
                 i++;
             }
             i = 0;
-            if (value[i] > 96 && value[i] < 123)
+            if (value[i] >= 'a' && value[i] <= 'z')
             {
                 throw new ArgumentException("Имя должно начинаться с заглавной буквы.");
             }
@@ -106,7 +105,7 @@ public class Contact
         get { return _email; }
         set
         {
-            if ((value.Length) > 50)
+            if ((value.Length) > 15)
             {
                 throw new ArgumentException("Длинна e-mail не должна превышать 50 символов.");
             }
@@ -148,6 +147,15 @@ public class Contact
             }
             _birth = value;
         }
+    }
+
+    /// <summary>
+    /// Возвращает и задаёт номер телефона
+    /// </summary>
+    public PhoneNumber Number
+    {
+        get { return _number; }
+        set { _number = value; }
     }
     public Contact() { }
 

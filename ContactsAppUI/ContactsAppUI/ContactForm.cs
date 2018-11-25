@@ -12,53 +12,43 @@ namespace ContactsAppUI
 {
     public partial class ContactForm : Form
     {
-        private Contact _newcontact=new Contact();
-        public Contact Newcontact
+        private Contact _contact=new Contact();
+        public Contact Contact
         {
-            get { return _newcontact; }
+            get { return _contact; }
             set
             {
-                _newcontact.Surname = value.Surname;
-                _newcontact.Name = value.Name;
-                _newcontact._number = value._number;
-                _newcontact.Birth = value.Birth;
-                _newcontact.Email = value.Email;
-                _newcontact.IdVk = value.IdVk;
+                _contact = new Contact();
+                _contact.Surname = value.Surname;
+                _contact.Name = value.Name;
+                _contact.Number = value._number;
+                _contact.Birth = value.Birth;
+                _contact.Email = value.Email;
+                _contact.IdVk = value.IdVk;
             }
-        }
-        
+        }        
             
         public ContactForm()
         {
             InitializeComponent();
-
-            
         }
-                        
+                
         /// <summary>
         /// Считывает фамилию контакта с TextBox
         /// </summary>
         private void SurnameTextBox_TextChanged(object sender, EventArgs e)
-        {
-            int i = 0;
+        {            
             try
             {
-                _newcontact.Surname = SurnameTextBox.Text;
-            }
-            catch(Exception ex)
-            {
-                //MessageBox.Show(ex.Message, "Неверный ввод данных");
-                SurnameTextBox.BackColor = Color.LightSalmon;
-                i++;
-            }
-            if(i!=0)
-            {
-                SurnameTextBox.BackColor = Color.LightSalmon;
-            }
-            else
-            {
+                _contact.Surname = SurnameTextBox.Text;
                 SurnameTextBox.BackColor = Color.White;
             }
+            catch(Exception ex)
+            {                
+                //MessageBox.Show(ex.Message, "Неверный ввод данных");
+                SurnameTextBox.BackColor = Color.LightSalmon;
+            }
+            
         }
         
         /// <summary>
@@ -66,26 +56,16 @@ namespace ContactsAppUI
         /// </summary>
         private void NameTextBox_TextChanged(object sender, EventArgs e)
         {
-            int i = 0;
             try
             {
-                _newcontact.Name = NameTextBox.Text;
+                _contact.Name = NameTextBox.Text;
+                NameTextBox.BackColor = Color.White;
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.Message, "Неверный ввод данных");
-                NameTextBox.BackColor = Color.LightSalmon;
-                i++;
-            }
-            if (i != 0)
-            {
-                NameTextBox.BackColor = Color.LightSalmon;
-            }
-            else
-            {
-                NameTextBox.BackColor = Color.White;
-            }
-            
+                MessageBox.Show(ex.Message, "Неверный ввод данных");
+                NameTextBox.BackColor = Color.LightSalmon;                
+            }            
         }
 
         /// <summary>
@@ -93,26 +73,16 @@ namespace ContactsAppUI
         /// </summary>
         private void BirthdayTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            int i = 0;
             try
             {
-                _newcontact.Birth = BirthdayTimePicker.Value;
+                _contact.Birth = BirthdayTimePicker.Value;
+                BirthdayTimePicker.BackColor = Color.White;
             }
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.Message, "Неверный ввод данных");
-                BirthdayTimePicker.BackColor = Color.LightSalmon;
-                i++;
+                BirthdayTimePicker.BackColor = Color.LightSalmon;                
             }
-            if (i != 0)
-            {
-                BirthdayTimePicker.BackColor = Color.LightSalmon;
-            }
-            else
-            {
-                BirthdayTimePicker.BackColor = Color.White;
-            }
-            
         }
 
         /// <summary>
@@ -120,27 +90,18 @@ namespace ContactsAppUI
         /// </summary>
         private void PhoneTextBox_TextChanged(object sender, EventArgs e)
         {
-            int i = 0;
             long number;
             try
             {
                 long.TryParse(PhoneTextBox.Text, out number);
-                _newcontact._number.Number = number;
+                _contact.Number.Number = number;
+                PhoneTextBox.BackColor = Color.White;
             }
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.Message, "Неверный ввод данных");
                 PhoneTextBox.BackColor = Color.LightSalmon;
-                i++;
-            }
-            if (i != 0)
-            {
-                PhoneTextBox.BackColor = Color.LightSalmon;
-            }
-            else
-            {
-                PhoneTextBox.BackColor = Color.White;
-            }
+            }            
         }
 
         /// <summary>
@@ -148,24 +109,15 @@ namespace ContactsAppUI
         /// </summary>
         private void EmailTextBox_TextChanged(object sender, EventArgs e)
         {
-            int i = 0;
             try
             {
-                _newcontact.Email = EmailTextBox.Text;
+                _contact.Email = EmailTextBox.Text;
+                EmailTextBox.BackColor = Color.White;
             }
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.Message, "Неверный ввод данных");
-                EmailTextBox.BackColor = Color.LightSalmon;
-                i++;
-            }
-            if (i != 0)
-            {
-                EmailTextBox.BackColor = Color.LightSalmon;
-            }
-            else
-            {
-                EmailTextBox.BackColor = Color.White;
+                EmailTextBox.BackColor = Color.LightSalmon;               
             }
         }
 
@@ -174,26 +126,16 @@ namespace ContactsAppUI
         /// </summary>
         private void VKTextBox_TextChanged(object sender, EventArgs e)
         {
-            int i = 0;
             try
             {
-                _newcontact.IdVk = VKTextBox.Text;
+                _contact.IdVk = VKTextBox.Text;
+                VKTextBox.BackColor = Color.White;
             }
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.Message, "Неверный ввод данных");
-                VKTextBox.BackColor = Color.LightSalmon;
-                i++;
+                VKTextBox.BackColor = Color.LightSalmon;                
             }
-            if (i != 0)
-            {
-                VKTextBox.BackColor = Color.LightSalmon;
-            }
-            else
-            {
-                VKTextBox.BackColor = Color.White;
-            }
-            
         }
 
         /// <summary>
@@ -203,8 +145,8 @@ namespace ContactsAppUI
         {
             DialogResult = DialogResult.OK;
             this.Close();
+            
         }
-
         /// <summary>
         /// Возвращает значение Cancle
         /// </summary>        
@@ -220,14 +162,14 @@ namespace ContactsAppUI
         /// </summary>
         private void OuterForm_Load(object sender, EventArgs e)
         {
-            if (_newcontact.Surname != null)
+            if (_contact.Surname != null)
             {
-                SurnameTextBox.Text = _newcontact.Surname;
-                NameTextBox.Text = _newcontact.Name;
-                BirthdayTimePicker.Value = _newcontact.Birth;
-                PhoneTextBox.Text = _newcontact._number.Number.ToString();
-                EmailTextBox.Text = _newcontact.Email;
-                VKTextBox.Text = _newcontact.IdVk;
+                SurnameTextBox.Text = _contact.Surname;
+                NameTextBox.Text = _contact.Name;
+                BirthdayTimePicker.Value = _contact.Birth;
+                PhoneTextBox.Text = _contact.Number.Number.ToString();
+                EmailTextBox.Text = _contact.Email;
+                VKTextBox.Text = _contact.IdVk;
             }
         }
     }

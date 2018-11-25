@@ -27,22 +27,6 @@ public class PhoneNumber
             {
                 throw new ArgumentException("Номер должен начинаться с цифры 7.");
             }
-            /*long first = value % 10000000000;
-            int count = 0;
-            while(a%10!=0)
-            {
-                count++;
-                a = a % 10;
-            }
-            if(count!=11)
-            {
-                throw new ArgumentException("Номер должен состоять из 11 цифр.");
-            }
-            if(first!=7)
-            {
-                throw new ArgumentException("Номер должен начинаться с цифры 7.");
-            }*/
-
             else { _number = value; }
         }
     }

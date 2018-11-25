@@ -13,24 +13,25 @@ namespace ContactsAppUI
     public partial class MainForm : Form
     {
 
-        private Project project;
+        private Project _project;
+
         public MainForm()
         {
             InitializeComponent();
             
-            project= ProjectManager.LoadFromFile();
-            if (project != null)
+            _project= ProjectManager.LoadFromFile(ProjectManager._path);            
+            if (_project != null)
             {
-                int i = 0;
-                while (i != project._contactsList.Count)
+                int i = 0;//foreach
+                while (i != _project._contactsList.Count)
                 {
-                    ContactsListBox.Items.Add(project._contactsList[i].Surname);
+                    ContactsListBox.Items.Add(_project._contactsList[i].Surname);
                     i++;
                 }
             }
             else
             {
-                project = new Project();
+                _project = new Project();
             }
         }
 
@@ -43,10 +44,10 @@ namespace ContactsAppUI
             var i = newForm.ShowDialog();            
             if (i == DialogResult.OK)
             {
-                var Contact = newForm.Newcontact;
-                project._contactsList.Add(Contact);
+                var Contact = newForm.Contact;
+                _project._contactsList.Add(Contact);
                 ContactsListBox.Items.Add(Contact.Surname);
-                ProjectManager.SaveToFile(project);
+                ProjectManager.SaveToFile(_project, ProjectManager._path);
             }
         }
 
@@ -56,18 +57,18 @@ namespace ContactsAppUI
         private void Edit()
         {
             var selectedIndex = ContactsListBox.SelectedIndex;
-            var selectedContact = project._contactsList[selectedIndex];
+            var selectedContact = _project._contactsList[selectedIndex];
             var newForm = new ContactForm();
-            newForm.Newcontact = selectedContact;
+            newForm.Contact = selectedContact;
             var i = newForm.ShowDialog();            
             if (i == DialogResult.OK)
             {
-                var updatedContact = newForm.Newcontact;
-                project._contactsList.Insert(selectedIndex, updatedContact);
+                var updatedContact = newForm.Contact;
+                _project._contactsList.Insert(selectedIndex, updatedContact);
                 ContactsListBox.Items.Insert(selectedIndex, updatedContact.Surname);
-                project._contactsList.RemoveAt(selectedIndex + 1);
+                _project._contactsList.RemoveAt(selectedIndex + 1);
                 ContactsListBox.Items.RemoveAt(selectedIndex + 1);
-                ProjectManager.SaveToFile(project);
+                ProjectManager.SaveToFile(_project, ProjectManager._path);
             }
         }
 
@@ -77,9 +78,9 @@ namespace ContactsAppUI
         private void Remove()
         {
             var selectedIndex = ContactsListBox.SelectedIndex;
-            project._contactsList.RemoveAt(selectedIndex);
+            _project._contactsList.RemoveAt(selectedIndex);
             ContactsListBox.Items.RemoveAt(selectedIndex);
-            ProjectManager.SaveToFile(project);
+            ProjectManager.SaveToFile(_project, ProjectManager._path);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -113,11 +114,11 @@ namespace ContactsAppUI
             {
                 selectedIndex = 0;
             }
-            Contact contact = project._contactsList[selectedIndex];
+            Contact contact = _project._contactsList[selectedIndex];
             SurnameTextBox.Text = contact.Surname;
             NameTextBox.Text = contact.Name;
             BirthdayTimePicker.Value = contact.Birth;
-            PhoneTextBox.Text = contact._number.Number.ToString();
+            PhoneTextBox.Text = contact.Number.Number.ToString();
             EmailTextBox.Text = contact.Email;
             VKTextBox.Text = contact.IdVk;
         }
@@ -164,7 +165,7 @@ namespace ContactsAppUI
         /// </summary>        
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var newForm = new About();
+            var newForm = new AboutForm();
             newForm.Show();
         }
     }
