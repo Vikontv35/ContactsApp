@@ -21,13 +21,13 @@ namespace ContactsAppUI
                 _contact = new Contact();
                 _contact.Surname = value.Surname;
                 _contact.Name = value.Name;
-                _contact.Number = value._number;
+                _contact.Number = value.Number;
                 _contact.Birth = value.Birth;
                 _contact.Email = value.Email;
                 _contact.IdVk = value.IdVk;
             }
-        }        
-            
+        }
+       
         public ContactForm()
         {
             InitializeComponent();
@@ -43,12 +43,10 @@ namespace ContactsAppUI
                 _contact.Surname = SurnameTextBox.Text;
                 SurnameTextBox.BackColor = Color.White;
             }
-            catch(Exception ex)
-            {                
-                //MessageBox.Show(ex.Message, "Неверный ввод данных");
+            catch(Exception)
+            {
                 SurnameTextBox.BackColor = Color.LightSalmon;
             }
-            
         }
         
         /// <summary>
@@ -61,11 +59,10 @@ namespace ContactsAppUI
                 _contact.Name = NameTextBox.Text;
                 NameTextBox.BackColor = Color.White;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message, "Неверный ввод данных");
                 NameTextBox.BackColor = Color.LightSalmon;                
-            }            
+            }       
         }
 
         /// <summary>
@@ -78,9 +75,8 @@ namespace ContactsAppUI
                 _contact.Birth = BirthdayTimePicker.Value;
                 BirthdayTimePicker.BackColor = Color.White;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //MessageBox.Show(ex.Message, "Неверный ввод данных");
                 BirthdayTimePicker.BackColor = Color.LightSalmon;                
             }
         }
@@ -97,9 +93,8 @@ namespace ContactsAppUI
                 _contact.Number.Number = number;
                 PhoneTextBox.BackColor = Color.White;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //MessageBox.Show(ex.Message, "Неверный ввод данных");
                 PhoneTextBox.BackColor = Color.LightSalmon;
             }            
         }
@@ -114,9 +109,8 @@ namespace ContactsAppUI
                 _contact.Email = EmailTextBox.Text;
                 EmailTextBox.BackColor = Color.White;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //MessageBox.Show(ex.Message, "Неверный ввод данных");
                 EmailTextBox.BackColor = Color.LightSalmon;               
             }
         }
@@ -131,9 +125,8 @@ namespace ContactsAppUI
                 _contact.IdVk = VKTextBox.Text;
                 VKTextBox.BackColor = Color.White;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                //MessageBox.Show(ex.Message, "Неверный ввод данных");
                 VKTextBox.BackColor = Color.LightSalmon;                
             }
         }
@@ -143,18 +136,38 @@ namespace ContactsAppUI
         /// </summary>
         private void OKButton_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.OK;
-            this.Close();
-            
+            long number;
+            bool flag;
+            try
+            {
+                flag = true;
+                _contact.Surname = SurnameTextBox.Text;
+                _contact.Name = NameTextBox.Text;
+                _contact.Birth = BirthdayTimePicker.Value;
+                long.TryParse(PhoneTextBox.Text, out number);
+                _contact.Number.Number = number;
+                _contact.Email = EmailTextBox.Text;
+                _contact.IdVk = VKTextBox.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Неверный ввод данных");                
+                flag = false;
+            }
+            if (flag == true)
+            {
+                DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
+
         /// <summary>
         /// Возвращает значение Cancle
         /// </summary>        
         private void CancleButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
-            this.Close();
-            
+            this.Close();            
         }
 
         /// <summary>

@@ -17,20 +17,20 @@ public class PhoneNumber
     {
         get { return _number; }
         set
-        {
+       {
             
-            if(value<10000000000)
+            if(value<10000000000 || value > 99999999999)
             {
                 throw new ArgumentException("Номер должен состоять из 11 цифр.");
             }
-            if(value<70000000000)
+            if(value<70000000000 || value >79999999999)
             {
                 throw new ArgumentException("Номер должен начинаться с цифры 7.");
             }
             else { _number = value; }
         }
     }
-
+    /*
     /// <summary>
     /// Конструктор класса
     /// </summary>
@@ -39,7 +39,7 @@ public class PhoneNumber
     {
         Number = number;
     }
-
+    */
     /// <summary>
     /// Конструктор класса
     /// </summary>

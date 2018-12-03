@@ -18,7 +18,7 @@ public class Contact
     /// <summary>
     /// Хранит номер телефона контакта
     /// </summary>
-    public PhoneNumber _number=new PhoneNumber();
+    private PhoneNumber _number=new PhoneNumber();
 
     /// <summary>
     /// Хранит Email контакта
@@ -107,7 +107,7 @@ public class Contact
         {
             if ((value.Length) > 15)
             {
-                throw new ArgumentException("Длинна e-mail не должна превышать 50 символов.");
+                throw new ArgumentException("Длинна e-mail не должна превышать 15 символов.");
             }
             _email = value;
         }
@@ -158,7 +158,7 @@ public class Contact
         set { _number = value; }
     }
     public Contact() { }
-
+    /*
     /// <summary>
     /// Конструктор класса Contact
     /// </summary>
@@ -176,5 +176,5 @@ public class Contact
         Birth = date;
         IdVk = idvk;
         Email = email;
-    }
+    }*/
 }
