@@ -30,24 +30,43 @@ namespace ContactsApp.UnitTests
         public void Test_Save_To_File_Correct_Value()
         {         
             _project._contactsList.Add(_contact);
-            
-            Assert.DoesNotThrow(
-                () => { ProjectManager.SaveToFile(_project,
-            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/ContactsAppTest.notes");
-                },"Тест пройден, если исключений не возникло");
+            ProjectManager.SaveToFile(_project,Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+                + "/source/repos/ContactsApp/ContactsAppUI/ContactsApp.UnitTests/ContactsAppTest1.notes");
+
+            string reference = System.IO.File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+                + "/source/repos/ContactsApp/ContactsAppUI/ContactsApp.UnitTests/ContactsAppTest.notes");
+            string actual= System.IO.File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+                + "/source/repos/ContactsApp/ContactsAppUI/ContactsApp.UnitTests/ContactsAppTest1.notes");
+
+            Assert.AreEqual(reference, actual, "Тест пройден, если исключений не возникло");                       
         }
 
         [Test(Description = "Позитивный тест десериализации")]
         public void Test_Load_From_File_Correct_Value()
         {
-            Project actualProject = new Project();
             _project._contactsList.Add(_contact);
+            Project actualProject = new Project();            
+            
+            actualProject = ProjectManager.LoadFromFile(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) +
+                "/source/repos/ContactsApp/ContactsAppUI/ContactsApp.UnitTests/ContactsAppTest.notes");
 
-            ProjectManager.SaveToFile(_project,"C:\\Users\\Viktor\\Documents\\ContactsAppTest2.notes");
-
-            actualProject = ProjectManager.LoadFromFile("C:\\Users\\Viktor\\Documents\\ContactsAppTest2.notes");
-
-            Assert.AreEqual(_project, actualProject, "Загрузка из файла работает некоректно");
+            Assert.AreEqual(_project._contactsList.Count, actualProject._contactsList.Count, "Загрузка работает некоректно1");
+            for (int i = 0; i != _project._contactsList.Count; i++)
+                {
+                Assert.AreEqual(_project._contactsList[i].Surname, actualProject._contactsList[i].Surname,
+                        "Загрузка работает некоректно2");
+                Assert.AreEqual(_project._contactsList[i].Name, actualProject._contactsList[i].Name,
+                        "Загрузка работает некоректно3");
+                Assert.AreEqual(_project._contactsList[i].Number.Number, actualProject._contactsList[i].Number.Number,
+                        "Загрузка работает некоректно4");
+                Assert.AreEqual(_project._contactsList[i].IdVk, actualProject._contactsList[i].IdVk,
+                        "Загрузка работает некоректно5");
+                Assert.AreEqual(_project._contactsList[i].Birth, actualProject._contactsList[i].Birth,
+                        "Загрузка работает некоректно6");
+                Assert.AreEqual(_project._contactsList[i].Email, actualProject._contactsList[i].Email,
+                         "Загрузка работает некоректно7");
+            }
+                                  
         }
     }
 }

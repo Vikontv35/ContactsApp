@@ -10,7 +10,7 @@ using System.Text;
 public class ProjectManager
 {
     
-    public static string _path= Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +"/save/ContactsApp.notes";
+    public static string _path= Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +"/ContactsApp.notes";
     
     /// <summary>
     /// Выполняет сохранение списка контактов
@@ -34,6 +34,10 @@ public class ProjectManager
         Project project = null;
         JsonSerializer serializer = new JsonSerializer();
 
+        if(System.IO.File.Exists(_path)==false)
+        {            
+            using (StreamWriter sw = new StreamWriter(filePath)) ;
+        }
         using (StreamReader sr = new StreamReader(filePath))
         using (JsonReader reader = new JsonTextReader(sr))
         {
